@@ -9,7 +9,7 @@
 
 #define DISP_BUF_SIZE (128 * 1024)
 
-int main(void)
+int main(int argc, char *argv[])
 {
     /*LittlevGL init*/
     lv_init();
@@ -29,8 +29,8 @@ int main(void)
     lv_disp_drv_init(&disp_drv);
     disp_drv.draw_buf   = &disp_buf;
     disp_drv.flush_cb   = fbdev_flush;
-    disp_drv.hor_res    = 800;
-    disp_drv.ver_res    = 480;
+    disp_drv.hor_res    = LV_HOR_RES_MAX;
+    disp_drv.ver_res    = LV_VER_RES_MAX;
     lv_disp_drv_register(&disp_drv);
 
     evdev_init();
@@ -51,8 +51,9 @@ int main(void)
 
 
     /*Create a Demo*/
-    lv_demo_widgets();
+//    lv_demo_widgets();
 
+launcher_widgets();
     /*Handle LitlevGL tasks (tickless mode)*/
     while(1) {
         lv_timer_handler();

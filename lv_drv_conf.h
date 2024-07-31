@@ -13,6 +13,7 @@
 #ifndef LV_DRV_CONF_H
 #define LV_DRV_CONF_H
 
+#define USB_FBDEV 1
 #include "lv_conf.h"
 
 /*********************
@@ -95,8 +96,8 @@
 #endif
 
 #if USE_SDL || USE_SDL_GPU
-#  define SDL_HOR_RES     480
-#  define SDL_VER_RES     320
+#  define SDL_HOR_RES     LV_HOR_RES_MAX
+#  define SDL_VER_RES     LV_VER_RES_MAX
 
 /* Scale window by this factor (useful when simulating small screens) */
 #  define SDL_ZOOM        1
@@ -447,16 +448,16 @@
 #endif
 
 #if USE_EVDEV || USE_BSD_EVDEV
-#  define EVDEV_NAME   "/dev/input/event10"        /*You can use the "evtest" Linux tool to get the list of devices and test them*/
+#  define EVDEV_NAME   "/dev/input/event1"        /*You can use the "evtest" Linux tool to get the list of devices and test them*/
 #  define EVDEV_SWAP_AXES         0               /*Swap the x and y axes of the touchscreen*/
 
-#  define EVDEV_CALIBRATE         0               /*Scale and offset the touchscreen coordinates by using maximum and minimum values for each axis*/
+#  define EVDEV_CALIBRATE         1               /*Scale and offset the touchscreen coordinates by using maximum and minimum values for each axis*/
 
 #  if EVDEV_CALIBRATE
 #    define EVDEV_HOR_MIN         0               /*to invert axis swap EVDEV_XXX_MIN by EVDEV_XXX_MAX*/
-#    define EVDEV_HOR_MAX      4096               /*"evtest" Linux tool can help to get the correct calibraion values>*/
+#    define EVDEV_HOR_MAX      480               /*"evtest" Linux tool can help to get the correct calibraion values>*/
 #    define EVDEV_VER_MIN         0
-#    define EVDEV_VER_MAX      4096
+#    define EVDEV_VER_MAX      480
 #  endif  /*EVDEV_CALIBRATE*/
 #endif  /*USE_EVDEV*/
 
